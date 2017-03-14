@@ -17,6 +17,14 @@ cd $HOME
 git clone https://github.com/goodylabs/radogost.git
 ```
 
+## Configure the backup procedure on the server (optional)
+
+Example for MySQL:
+
+```bash
+{ crontab -l ; echo '30 5 * * * /bin/mkdir -p /root/backup && CURR_DATE=`date +%Y%m%d` /usr/bin/mysqldump -u root project_x > /root/backup/backup_${CURR_DATE}_project_x.sql && /bin/gzip -9r /root/backup/backup_${CURR_DATE}_project_x.sql; } | crontab -
+```
+
 ## Install in crontab
 
 The following will install a crontab entry with fetching:
@@ -27,6 +35,6 @@ The following will install a crontab entry with fetching:
 and put it in $HOME/project_x into local user.
 It will autorotate old backups and only latest 3 will remain in that directory.
 
-```
+```bash
 { crontab -l ; echo '38 5 * * * $HOME/radogost/scripts/fetch_latest_backups.sh somehost.com 22 /home/some_remote_user/backup "backup_*.sql.gz" $HOME/project_x 3'; } | crontab -
 ```
