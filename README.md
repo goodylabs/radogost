@@ -22,7 +22,7 @@ git clone https://github.com/goodylabs/radogost.git
 Example for MySQL:
 
 ```bash
-{ crontab -l ; echo '30 5 * * * /bin/mkdir -p /root/backup && CURR_DATE=`date +%Y%m%d%H%M%S` /usr/bin/mysqldump -u root project_x > /root/backup/backup_${CURR_DATE}_project_x.sql && /bin/gzip -9r /root/backup/backup_${CURR_DATE}_project_x.sql'; } | crontab -
+{ crontab -l ; echo '30 5 * * * CURR_DATE=`date +%Y%m%d%H%M%S` && /bin/mkdir -p /root/backup && /usr/bin/mysqldump -u root project_x > /root/backup/backup_${CURR_DATE}_project_x.sql && /bin/gzip -9r /root/backup/backup_${CURR_DATE}_project_x.sql'; } | crontab -
 ```
 
 ## Install in crontab
