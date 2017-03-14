@@ -10,22 +10,22 @@ is an old god of hospitality in the Slavic mythology.
 This project is a set of scripts to:
 * fetch backup from remote machines using [scp](http://en.wikipedia.org/wiki/Secure_copy) 
 
-## Download 
+## Download (both on source server and on backup machine)
 
 ``` 
 cd $HOME
 git clone https://github.com/goodylabs/radogost.git
 ```
 
-## Configure the backup procedure on the server (optional)
+## Configure the backup procedure on source server (optional)
 
-Example for MySQL:
+Example for MySQL (leave last 3 backups):
 
 ```bash
-{ crontab -l ; echo '30 5 * * * CURR_DATE=`date +%Y%m%d%H%M%S` && /bin/mkdir -p /root/backup && /usr/bin/mysqldump -u root project_x > /root/backup/backup_${CURR_DATE}_project_x.sql && /bin/gzip -9r /root/backup/backup_${CURR_DATE}_project_x.sql'; } | crontab -
+{ crontab -l ; echo '30 5 * * * CURR_DATE=`date +%Y%m%d%H%M%S` && /bin/mkdir -p /root/backup && /usr/bin/mysqldump -u root project_x > /root/backup/backup_${CURR_DATE}_project_x.sql && /bin/gzip -9r /root/backup/backup_${CURR_DATE}_project_x.sql && /root/radogost/scripts/rotate_latest_backups.sh /root/backup *.sql.gz 3'; } | crontab -
 ```
 
-## Install in crontab
+## Install in crontab on backup machine
 
 The following will install a crontab entry with fetching:
 * files that match regexp: backup_*.sql.gz
