@@ -36,5 +36,5 @@ and put it in $HOME/project_x into local user.
 It will autorotate old backups and only latest 3 will remain in that directory.
 
 ```bash
-{ crontab -l ; echo '38 5 * * * $HOME/radogost/scripts/fetch_latest_backups.sh somehost.com 22 /home/some_remote_user/backup "backup_*.sql.gz" $HOME/project_x 3'; } | crontab -
+{ crontab -l ; echo '38 5 * * * $HOME/radogost/scripts/fetch_latest_backups.sh root somehost.com 22 /root/backup "backup_*.sql.gz" $HOME/project_x 3'; } | crontab -
 ```
