@@ -24,6 +24,11 @@ Example for MySQL (leave last 3 backups):
 ```bash
 { crontab -l ; echo '30 5 * * * CURR_DATE=`date +%Y%m%d%H%M%S` && /bin/mkdir -p /root/backup && /usr/bin/mysqldump -u root project_x > /root/backup/backup_${CURR_DATE}_project_x.sql && /bin/gzip -9r /root/backup/backup_${CURR_DATE}_project_x.sql && /root/radogost/scripts/rotate_latest_backups.sh /root/backup *.sql.gz 3'; } | crontab -
 ```
+Example for Redis (leave last 3 backups):
+
+```bash
+{ crontab -l ; echo '30 5 * * * CURR_DATE=`date +%Y%m%d%H%M%S` && /bin/mkdir -p /root/backup && /bin/cp /var/lib/redis/dump.rdb /root/backup/backup_${CURR_DATE}_dump.rdb && /bin/gzip -9r /root/backup/backup_${CURR_DATE}_dump.rdb && /root/radogost/scripts/rotate_latest_backups.sh /root/backup *.rdb.gz 3'; } | crontab -
+```
 
 ## Install in crontab on backup machine
 
