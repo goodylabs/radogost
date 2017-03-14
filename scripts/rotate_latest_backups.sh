@@ -37,6 +37,6 @@ else
   cd ${LOCAL_PATH}
 
   # Leave only n latest files
-  (${LS} -1t ${FILEMASK} | ${HEAD} -n ${NUM_OF_LAST_FILES_REMAINING};${LS} ${FILEMASK}) | ${SORT} | ${UNIQ} -u | ${XARGS} ${RM}
+  (${LS} -1t ${FILEMASK} | ${HEAD} -n ${NUM_OF_LAST_FILES_REMAINING};${LS} ${FILEMASK}) | ${SORT} | ${UNIQ} | ${XARGS} ${RM}
 
 fi
