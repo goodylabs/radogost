@@ -22,19 +22,19 @@ git clone https://github.com/goodylabs/radogost.git
 Example for MySQL for smaller databases with default table locking and UTF-8 with emojis for data consistency (leave last 3 backups):
 
 ```bash
-{ crontab -l ; echo '30 5 * * * CURR_DATE=`date +%Y%m%d%H%M%S` && /bin/mkdir -p /root/backup && /usr/bin/mysqldump --lock-tables=true --default-character-set=utf8mb4 -u root project_x > /root/backup/backup_${CURR_DATE}_project_x.sql && /bin/gzip -9r /root/backup/backup_${CURR_DATE}_project_x.sql && /root/radogost/scripts/rotate_latest_backups.sh /root/backup *.sql.gz 3'; } | crontab -
+{ crontab -l ; echo '30 5 * * * CURR_DATE=`date +\%Y\%m\%d\%H\%M\%S` && /bin/mkdir -p /root/backup && /usr/bin/mysqldump --lock-tables=true --default-character-set=utf8mb4 -u root project_x > /root/backup/backup_${CURR_DATE}_project_x.sql && /bin/gzip -9r /root/backup/backup_${CURR_DATE}_project_x.sql && /root/radogost/scripts/rotate_latest_backups.sh /root/backup *.sql.gz 3'; } | crontab -
 ```
 Example for MySQL for larger databases with UTF-8 encoding with emojis but without default table locking that can cause a database speed downgrade on a heavily used production server (leave last 3 backups):
 
 ```bash
-{ crontab -l ; echo '30 5 * * * CURR_DATE=`date +%Y%m%d%H%M%S` && /bin/mkdir -p /root/backup && /usr/bin/mysqldump --lock-tables=false --default-character-set=utf8mb4 -u root project_x > /root/backup/backup_${CURR_DATE}_project_x.sql && /bin/gzip -9r /root/backup/backup_${CURR_DATE}_project_x.sql && /root/radogost/scripts/rotate_latest_backups.sh /root/backup *.sql.gz 3'; } | crontab -
+{ crontab -l ; echo '30 5 * * * CURR_DATE=`date +\%Y\%m\%d\%H\%M\%S` && /bin/mkdir -p /root/backup && /usr/bin/mysqldump --lock-tables=false --default-character-set=utf8mb4 -u root project_x > /root/backup/backup_${CURR_DATE}_project_x.sql && /bin/gzip -9r /root/backup/backup_${CURR_DATE}_project_x.sql && /root/radogost/scripts/rotate_latest_backups.sh /root/backup *.sql.gz 3'; } | crontab -
 ```
 
 
 Example for Redis (leave last 3 backups):
 
 ```bash
-{ crontab -l ; echo '30 5 * * * CURR_DATE=`date +%Y%m%d%H%M%S` && /bin/mkdir -p /root/backup && /bin/cp /var/lib/redis/dump.rdb /root/backup/backup_${CURR_DATE}_dump.rdb && /bin/gzip -9r /root/backup/backup_${CURR_DATE}_dump.rdb && /root/radogost/scripts/rotate_latest_backups.sh /root/backup *.rdb.gz 3'; } | crontab -
+{ crontab -l ; echo '30 5 * * * CURR_DATE=`date +\%Y\%m\%d\%H\%M\%S` && /bin/mkdir -p /root/backup && /bin/cp /var/lib/redis/dump.rdb /root/backup/backup_${CURR_DATE}_dump.rdb && /bin/gzip -9r /root/backup/backup_${CURR_DATE}_dump.rdb && /root/radogost/scripts/rotate_latest_backups.sh /root/backup *.rdb.gz 3'; } | crontab -
 ```
 
 ## Install in crontab on backup machine
