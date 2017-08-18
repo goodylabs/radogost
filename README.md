@@ -17,7 +17,7 @@ cd $HOME
 git clone https://github.com/goodylabs/radogost.git
 ```
 
-## Configure the backup procedure on source server (optional)
+## Configure the database backup procedure on source server (optional)
 
 Example for MySQL for smaller databases with default table locking and UTF-8 with emojis for data consistency (leave last 3 backups):
 
